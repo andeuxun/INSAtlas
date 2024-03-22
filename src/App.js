@@ -1,24 +1,39 @@
 import logo from './logo.svg';
+import 'leaflet/dist/leaflet.css';
+
 import './App.css';
 
+
+import React, { useContext } from 'react';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import MarkerClusterGroup from "react-leaflet-cluster";
+
+import { Icon, divIcon, point } from "leaflet";
+
 function App() {
+  const markers = [
+    {
+      geocode: [45.78371678536146, 4.872668222908341],
+      popUp: "Bâtiment Claude Chappe"
+    },
+  ];
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MapContainer 
+      center={[45.784036153602656, 4.877490572345281]} 
+      zoom={16} 
+      scrollWheelZoom={true}
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      />
+      <Marker position={[45.78371098334414, 4.872662719694708]}>
+       
+      </Marker>
+    
+    </MapContainer>
   );
 }
 

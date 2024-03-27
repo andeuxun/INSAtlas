@@ -25,11 +25,11 @@ db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', async function() { // Make this function async
   console.log("Connected to MongoDB database!");
 
-  const directoryPath = path.join(__dirname, 'data');
+  const directoryPath = path.join(__dirname, 'Batiments');
 
   try {
     const files = await fs.readdir(directoryPath);
-    const jsonFiles = files.filter(file => file.endsWith('.json') && file.startsWith('TC'));
+    const jsonFiles = files.filter(file => file.endsWith('.json'));
 
     // Read each file and insert it into the collection
     for (const file of jsonFiles) {
@@ -37,7 +37,7 @@ db.once('open', async function() { // Make this function async
       const doc = JSON.parse(await fs.readFile(filePath, 'utf8'));
 
       try {
-        await db.collection('salles').insertOne(doc);
+        await db.collection('batiments').insertOne(doc);
         console.log(`Inserted document from ${file}`);
       } catch (err) {
         console.error(`Error inserting document from ${file}: ${err}`);

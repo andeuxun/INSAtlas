@@ -6,17 +6,9 @@ import './App.css';
 
 import React, { useContext } from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import MarkerClusterGroup from "react-leaflet-cluster";
 
-import { Icon, divIcon, point } from "leaflet";
 
 function App() {
-  const markers = [
-    {
-      geocode: [45.78371678536146, 4.872668222908341],
-      popUp: "Bâtiment Claude Chappe"
-    },
-  ];
   
 
   return (
@@ -27,12 +19,8 @@ function App() {
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
       />
-      <Marker position={[45.78371098334414, 4.872662719694708]}>
-       
-      </Marker>
-    
     </MapContainer>
   );
 }

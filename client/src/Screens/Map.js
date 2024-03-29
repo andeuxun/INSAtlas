@@ -1,25 +1,15 @@
 import 'leaflet/dist/leaflet.css';
 import '../App.css';
 import React from 'react';
-//import { SearchBar } from 'react-native-elements';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import Search from "react-leaflet-search";
+import { MapContainer, TileLayer, Marker, Search } from 'react-leaflet';
+//import Search from "react-leaflet-search";
+import LocationMarker from '../Outils/LocationMarker';
 
 export default class Map extends React.Component {
-
-  /*titleSection = () => {
-    return (
-      <div style={{height: "40%", backgroundColor: 'powderblue', flexDirection: 'column'}} >
-        <h1 style={{textAlign: "center", fontWeight: "bold", fontSize: 30}}>
-          INSAtlas
-        </h1>
-      </div>
-    );
-  }*/
-
+  
    searchSection = () => {
     return (
-      <div style={{height: "7%", backgroundColor: 'powderblue', flexDirection: 'column'}} >
+      <div style={{height: "5%", backgroundColor: 'powderblue', flexDirection: 'column'}} >
         <input type="text" placeholder="Search..." style={{width: "100%", height: "100%"}}/>
       </div>
     );  
@@ -42,6 +32,7 @@ export default class Map extends React.Component {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
             />
+            <LocationMarker />
           </MapContainer>  
         </div>
       </div>

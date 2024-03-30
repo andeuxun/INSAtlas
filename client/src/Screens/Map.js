@@ -1,16 +1,26 @@
 import 'leaflet/dist/leaflet.css';
 import '../App.css';
-import React from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-//import Search from "react-leaflet-search";
-import LocationMarker from '../Outils/LocationMarker';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import Layers from '../Outils/Layers';
 import Search from './Search';
+import DynamicButtons from '../Outils/DynamicButtons';
 
-export default class Map extends React.Component {
+export default function Map() {
+  const [tileLayerUrl, setTileLayerUrl] = useState('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png');
 
-  mapSection = () => {
-    return (
+  const toggleTileLayer = () => {
+    const newUrl = tileLayerUrl === 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
+      ? 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
+      : 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png';
+    
+    setTileLayerUrl(newUrl);
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <Search />
+      
       <div style={{ height: "100%", flexDirection: 'column'}}>
         <div style={{height: "100%"}}>
           <MapContainer
@@ -18,26 +28,17 @@ export default class Map extends React.Component {
             zoom={16}
             scrollWheelZoom={true}
             zoomControl= {false}
-            style={{ height: "100%", width: "100%" }} // Ensure map container takes up entire parent div
+            style={{ height: "100%", width: "100%" }}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+              url={tileLayerUrl}
             />
-            <LocationMarker />
+            <DynamicButtons toggleTileLayer={toggleTileLayer} />
             <Layers />
           </MapContainer>  
         </div>
       </div>
-    );
-  }
-
-  render() {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-        <Search />
-        {this.mapSection()}
-      </div>
-    );
-  }
+    </div>
+  );
 }

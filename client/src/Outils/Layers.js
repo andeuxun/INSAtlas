@@ -21,7 +21,7 @@ function Layers() {
       popupAnchor: [-3, -76],
   });
     return (
-    <LayersControl position="bottomright">
+    <LayersControl position="bottomleft">
       <LayersControl.Overlay checked name="Repères">
         <FeatureGroup>
           <Reperes/>

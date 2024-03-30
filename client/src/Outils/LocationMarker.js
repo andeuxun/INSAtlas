@@ -23,7 +23,7 @@ function LocationMarker() {
   };
 
   return (
-    <div style={{ position: 'absolute', bottom: '20px', right: '20px', zIndex: 1000 }}>
+    <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 1000 }}>
       <button onClick={handleToggleLocation}>
         {showUserLocation ? 'Show Default Location' : 'Show My Location'}
       </button>

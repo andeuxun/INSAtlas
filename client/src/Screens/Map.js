@@ -1,31 +1,23 @@
 import 'leaflet/dist/leaflet.css';
 import '../App.css';
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Search } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 //import Search from "react-leaflet-search";
 import LocationMarker from '../Outils/LocationMarker';
+import Layers from '../Outils/Layers';
+import Search from './Search';
 
 export default class Map extends React.Component {
-  
-   searchSection = () => {
-    return (
-      <div style={{height: "5%", backgroundColor: 'powderblue', flexDirection: 'column'}} >
-        <input type="text" placeholder="Search..." style={{width: "100%", height: "100%"}}/>
-      </div>
-    );  
-  }
 
   mapSection = () => {
     return (
-      <div style={{ height: "95%", flexDirection: 'column'}}>
-        <div style={{}}>
-          {this.searchSection}
-        </div>
+      <div style={{ height: "100%", flexDirection: 'column'}}>
         <div style={{height: "100%"}}>
           <MapContainer
             center={[45.784036153602656, 4.877490572345281]}
             zoom={16}
             scrollWheelZoom={true}
+            zoomControl= {false}
             style={{ height: "100%", width: "100%" }} // Ensure map container takes up entire parent div
           >
             <TileLayer
@@ -33,6 +25,7 @@ export default class Map extends React.Component {
               url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
             />
             <LocationMarker />
+            <Layers />
           </MapContainer>  
         </div>
       </div>
@@ -42,13 +35,7 @@ export default class Map extends React.Component {
   render() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-        
-        <div style={{ height: "5%", backgroundColor: 'powderblue', flexDirection: 'column' }} >
-          <h1 style={{textAlign: "center", fontWeight: "bold", fontSize: 30}}>
-            INSAtlas
-          </h1>
-        </div>
-        {this.searchSection()}
+        <Search />
         {this.mapSection()}
       </div>
     );

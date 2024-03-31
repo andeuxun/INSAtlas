@@ -1,7 +1,11 @@
 {
   "dependencies": {
+<<<<<<< HEAD
     "express": "^4.19.2",
     "mongodb": "^6.5.0",
     "mongoose": "^8.2.4"
+=======
+    "react-autocomplete": "^1.8.1"
+>>>>>>> 1ac9efc3d66ac350ce38eaee1177996eb11a7215
   }
 }

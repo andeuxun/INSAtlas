@@ -14,14 +14,16 @@ MongoClient.connect(url, function(err, client) {
     console.log("Connected successfully to server");
 
     const db = client.db(dbName);
-    const collection = db.collection('salles');
+    const collection = db.collection('services');
 
     // Get all files in the 'data' directory
     fs.readdir('client/data', (err, files) => {
         if (err) throw err;
 
         // Filter the files to only include .json files that start with 'BS_'
-        const jsonFiles = files.filter(file => file.startsWith('BS_') && file.endsWith('.json'));
+        //const jsonFiles = files.filter(file => file.startsWith('BS_') && file.endsWith('.json'));
+        
+        const jsonFiles = files.filter(file => file.endsWith('.json'));
 
         // Read each file and insert it into the collection
         const insertOperations = jsonFiles.map(file => {

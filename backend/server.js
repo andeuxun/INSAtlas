@@ -19,13 +19,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // MongoDB connection
-mongoose.connect("mongodb+srv://cristinacanela:Cambrils@insatlas.ws8zgj1.mongodb.net/", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://ninarodriguezz:PAssword123@insatlas.ws8zgj1.mongodb.net/", { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection.useDb('sample_mflix');
 db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', async function() { // Make this function async
   console.log("Connected to MongoDB database!");
 
-  const directoryPath = path.join(__dirname, 'Batiments');
+  const directoryPath = path.join(__dirname, 'Services');
 
   try {
     const files = await fs.readdir(directoryPath);
@@ -37,7 +37,7 @@ db.once('open', async function() { // Make this function async
       const doc = JSON.parse(await fs.readFile(filePath, 'utf8'));
 
       try {
-        await db.collection('batiments').insertOne(doc);
+        await db.collection('services').insertOne(doc);
         console.log(`Inserted document from ${file}`);
       } catch (err) {
         console.error(`Error inserting document from ${file}: ${err}`);

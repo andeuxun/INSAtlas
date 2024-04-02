@@ -26,7 +26,7 @@ function DynamicButtons({ toggleTileLayer }) {
           <LocationMarker />
         </div>
       )}
-      <button onClick={toggleButtons}>
+      <button onClick={toggleButtons} className='bouton'>
         {showButtons ? 'Less options' : 'More options'}
       </button>
     </div>

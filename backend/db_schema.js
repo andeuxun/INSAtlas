@@ -36,6 +36,10 @@ const sallesSchema = mongoose.Schema({
     departement : {
         type : String,
         required: true
+    }, 
+    autre: {
+        type : String,
+        required: false
     }
 })
 

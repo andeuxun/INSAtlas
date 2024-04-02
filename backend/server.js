@@ -117,6 +117,26 @@ app.post('/addSalle', async (req, res) => {
   }
 });
 
+app.post('/updateSalle', async (req, res) => {
+  const { id, autre } = req.body;
+
+  try {
+    const updatedSalle = await Salles.findOneAndUpdate(
+      { id: id },
+      { autre: autre },
+      { new: true } // This option returns the updated document
+    );
+
+    if (updatedSalle) {
+      res.status(200).json(updatedSalle);
+    } else {
+      res.status(404).json({ message: 'Salle not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 mongoose.connect("mongodb+srv://jean:WEB_INSATLAS123@insatlas.ws8zgj1.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=INSAtlas")
 .then(() => {

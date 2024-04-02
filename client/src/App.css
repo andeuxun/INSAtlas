@@ -8,23 +8,21 @@
 
 .searchContainer {
   position: absolute;
-  top: 10vw;
-  left: 50%;
+  top: 6vw;
+  left: 45%;
   transform: translate(-50%, -50%);
   z-index: 1000;
 }
 
-.input {
-  width: 80vw;
-  height: 7vw;
-  border-radius: 20px;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  outline: none;
-  transition: box-shadow 0.3s ease;
-  background-image: linear-gradient(to top, #ffffff, #f2f2f2);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+.leaflet-popup-content-wrapper {
+  height: auto;
+  width: 253px;
 }
+
+.reperes {
+  fill: #ff0000;
+  stroke: #ff0000;
+  fill-opacity: 0.5;
+  stroke-width: 0.5;
+}
+

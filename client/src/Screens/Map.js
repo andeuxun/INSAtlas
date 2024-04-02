@@ -6,6 +6,7 @@ import Layers from '../Outils/Layers';
 import Search from './Search';
 import DynamicButtons from '../Outils/DynamicButtons';
 
+
 export default function Map() {
   const [tileLayerUrl, setTileLayerUrl] = useState('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png');
 

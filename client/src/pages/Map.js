@@ -5,6 +5,7 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import Layers from '../Outils/Layers';
 import Search from '../Screens/Search';
 import DynamicButtons from '../Outils/DynamicButtons';
+import AddButton from '../Outils/AddButton';
 
 
 export default function Map() {
@@ -31,6 +32,7 @@ export default function Map() {
             style={{ height: "100%", width: "100%" }}
           >
             <Search />
+            <AddButton />
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url={tileLayerUrl}

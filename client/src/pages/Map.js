@@ -17,10 +17,9 @@ export default function Map() {
     
     setTileLayerUrl(newUrl);
   };
-  
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <Search />
       
       <div style={{ height: "100%", flexDirection: 'column'}}>
         <div style={{height: "100%"}}>
@@ -31,6 +30,7 @@ export default function Map() {
             zoomControl= {false}
             style={{ height: "100%", width: "100%" }}
           >
+            <Search />
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url={tileLayerUrl}

@@ -25,7 +25,7 @@ function LocationMarker() {
   return (
     <div>
       <button onClick={handleToggleLocation}>
-        {showUserLocation ? 'Show Default Location' : 'Show My Location'}
+        {showUserLocation ? 'Show Default Location' : 'Show Me on the Map'}
       </button>
       {userLocation && (
         <CircleMarker center={userLocation} radius={10}>

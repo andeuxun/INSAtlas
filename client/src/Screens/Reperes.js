@@ -11,7 +11,7 @@ function Test({ nb }) {
     });
     useEffect(() => {
         // Read JSON data from file
-        fetch(`data/reperes/${nb}.json`)
+        fetch(`http://localhost:3001/getreperes`)
             .then(response => response.json())
             .then(data => {
                 setMarkerData(data);
@@ -19,17 +19,17 @@ function Test({ nb }) {
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, [nb]);
+    }, []);
 
     return (
         <>
             {markerData && (
                 <CircleMarker 
-                    center={[parseFloat(markerData.coord.split(',')[0]), parseFloat(markerData.coord.split(',')[1])]} 
+                    center={[parseFloat(markerData[nb].coord.split(',')[0]), parseFloat(markerData[nb].coord.split(',')[1])]} 
                     radius={10}
                     className='reperes'
                 >
-                    <Popup>
+                    <Popup className='popup-src'>
                         <div>
                             <h3>{markerData.name}</h3>
                             <img src={markerData.picture} alt={markerData.name} style={{ maxWidth: '200px' }} />
@@ -42,7 +42,7 @@ function Test({ nb }) {
 }
 function addReperes() {
     const reperes = [];
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 0; i <= 6; i++) {
         reperes.push(<Test nb={i} key={i} />);
     }
     return (

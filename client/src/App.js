@@ -1,17 +1,14 @@
-import 'leaflet/dist/leaflet.css';
-import './App.css';
-//import { StatusBar } from 'expo-status-bar';
-
-import styled from 'styled-components';
-
-import React, { useContext } from 'react';
-import Map from './Screens/Map';
+// App.js
+import React from 'react';
+import Path from './Path'; // Correct import path
+import Map from './pages/Map'; // Correct import path
 
 
 function App() {
-
   return (
-   <Map/>
+    <div className="App">
+      <Map />
+    </div>
   );
 }
 

@@ -2,11 +2,9 @@
 
 function AddButton() {
 
-  const addField = () => {console.log('add')};
-
   return (
     <div>
-        <button onClick={addField} style={{
+        <button style={{
             position: 'absolute',
             right: '15px',
             top: '25px',

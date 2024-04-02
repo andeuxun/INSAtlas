@@ -31,7 +31,8 @@ for sheet_name, df in dfs.items():
             'batiment': remove_accents_and_lowercase(row['DESIGNATION BATIMENT']) if 'DESIGNATION BATIMENT' in row else None,
             'etage': remove_accents_and_lowercase(row['DESIGNATION ETAGE']) if 'DESIGNATION ETAGE' in row else None,
             'usage': remove_accents_and_lowercase(row['DESIGNATION USAGE']) if 'DESIGNATION USAGE' in row else None,
-            'departement': remove_accents_and_lowercase(sheet_name)
+            'departement': remove_accents_and_lowercase(sheet_name),
+            'autre': None
         }
 
         # Convert the dictionary to a JSON string

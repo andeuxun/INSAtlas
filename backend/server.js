@@ -100,6 +100,43 @@ app.get('/getreperes', async(req, res) => {
   }
 });
 
+app.post('/addSalle', async (req, res) => {
+  const newSalle = new Salles({
+    id: req.body.id,
+    batiment: req.body.batiment,
+    etage: req.body.etage,
+    usage: req.body.usage,
+    departement: req.body.departement
+  });
+
+  try {
+    const savedSalle = await newSalle.save();
+    res.status(201).json(savedSalle);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+app.post('/updateSalle', async (req, res) => {
+  const { id, autre } = req.body;
+
+  try {
+    const updatedSalle = await Salles.findOneAndUpdate(
+      { id: id },
+      { autre: autre },
+      { new: true } // This option returns the updated document
+    );
+
+    if (updatedSalle) {
+      res.status(200).json(updatedSalle);
+    } else {
+      res.status(404).json({ message: 'Salle not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 mongoose.connect("mongodb+srv://jean:WEB_INSATLAS123@insatlas.ws8zgj1.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=INSAtlas")
 .then(() => {

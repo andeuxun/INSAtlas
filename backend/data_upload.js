@@ -37,7 +37,7 @@ db.once('open', async function() { // Make this function async
       const doc = JSON.parse(await fs.readFile(filePath, 'utf8'));
 
       try {
-        await db.collection('batiments').insertOne(doc);
+        await db.collection('salles').insertOne(doc);
         console.log(`Inserted document from ${file}`);
       } catch (err) {
         console.error(`Error inserting document from ${file}: ${err}`);

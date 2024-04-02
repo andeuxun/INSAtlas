@@ -19,14 +19,14 @@ function DynamicButtons({ toggleTileLayer }) {
       {showButtons && (
         <div>
           <div>
-            <button onClick={toggleMapButton}>
+            <button onClick={toggleMapButton} style={{ float: 'right' }}>
               {mapButton ? 'Light' : 'Dark'}
             </button>
           </div>
           <LocationMarker />
         </div>
       )}
-      <button onClick={toggleButtons}>
+      <button onClick={toggleButtons} style={{ float: 'right' }}>
         {showButtons ? 'Less options' : 'More options'}
       </button>
     </div>

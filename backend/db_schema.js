@@ -66,8 +66,28 @@ const batimentsSchema = mongoose.Schema({
     }
 })
 
+const reperesSchema = mongoose.Schema({
+    id : {
+        type : String,
+        required: true
+    },
+    name : {
+        type : String,
+        required: true
+    },
+    coord : {
+        type : String,
+        required: true
+    },
+    picture : {
+        type : String,
+        required: true
+    }
+})
+
 
 const Data = mongoose.model("Data", dataSchema, "users");
 const Salles = mongoose.model("Salles", sallesSchema, "salles");
 const Batiments = mongoose.model("Batiments", batimentsSchema, "batiments");
-module.exports = {Salles, Batiments};
+const Reperes = mongoose.model("Reperes", reperesSchema, "reperes");
+module.exports = {Salles, Batiments, Reperes};

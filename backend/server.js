@@ -6,6 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const {Batiments, Salles} = require('./db_schema');
+const {Reperes} = require('./db_schema'); 
 const cors = require('cors');
 
 const app = express();
@@ -32,7 +33,6 @@ app.get('/findplace', async(req,res) => {
       { name: regexPattern },
       { name2: regexPattern },
       { dept: regexPattern },
-      // Add other fields you need to search here
     ] };
 
     const query_salles = { $or: [
@@ -80,6 +80,25 @@ app.get('/findplace', async(req,res) => {
   }
 })
 
+app.get('/getreperes', async(req, res) => {
+  try {
+    const data_reperes_raw = await Reperes.find({});
+
+    const dataReperes = data_reperes_raw.map(doc => ({
+      id: doc.id,
+      name: doc.name,
+      coord: doc.coord,
+      picture: doc.picture
+    }));
+
+    console.log("Data Reperes: \n", dataReperes);
+
+    res.status(200).json(dataReperes);
+  } catch (error) {
+    console.log("Error");
+    res.status(500).json({message: error.message})
+  }
+});
 
 
 mongoose.connect("mongodb+srv://jean:WEB_INSATLAS123@insatlas.ws8zgj1.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=INSAtlas")

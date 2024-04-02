@@ -26,21 +26,11 @@
   stroke-width: 0.5;
 }
 
-
-.bouton {
-  display: inline-block;
-  background-color: #6495ED; /* Couleur du bouton (bleu) */
-  border-radius: 100%; /* Forme circulaire */
-  border: none; /* Pas de bordure */
-  color: white; /* Texte en blanc */
-  padding: 15px 20px; /* Espacement intérieur */
-  cursor: pointer; /* Curseur de souris */
-  font-size: 20px; /* Taille de police */
-  outline: none; /* Pas de contour de focus */
-}
-
-span {
-  font-size: 20px;
+.dynamic-bouton {
+  position: 'absolute';
+  bottom: '20px';
+  right: '20px';
+  zIndex: 1000
 }
 
 .bouton {

@@ -39,7 +39,7 @@ const sallesSchema = mongoose.Schema({
     }, 
     autre: {
         type : String,
-        required: false
+        required: true
     }
 })
 

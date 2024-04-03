@@ -3,14 +3,34 @@ import { CircleMarker, Popup } from 'react-leaflet';
 import * as L from "leaflet";
 import '../App.css';
 
-function Test({ nb }) {
-    const [markerData, setMarkerData] = useState(null);
+function AddReperes({ data }) {
     var myIcon = L.icon({
         iconUrl: 'https://static.vecteezy.com/system/resources/previews/016/314/852/non_2x/map-pointer-icon-gps-location-symbol-maps-pin-location-map-icon-free-png.png',
         iconSize: [38, 38],
     });
+
+    return (
+        <CircleMarker
+            center={[parseFloat(data.coord.split(',')[0]), parseFloat(data.coord.split(',')[1])]}
+            radius={10}
+            className='reperes'
+        >
+            <Popup className='popup-src'>
+                <div>
+                    <h3>{data.name}</h3>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <img src={data.picture} alt={data.name} style={{ maxWidth: '200px' }} />
+                    </div>
+                </div>
+            </Popup>
+        </CircleMarker>
+    );
+}
+
+function Reperes() {
+    const [markerData, setMarkerData] = useState([]);
+
     useEffect(() => {
-        // Read JSON data from file
         fetch(`http://localhost:3001/getreperes`)
             .then(response => response.json())
             .then(data => {
@@ -21,40 +41,12 @@ function Test({ nb }) {
             });
     }, []);
 
+    const reperes = markerData.map((data, index) => (
+        <AddReperes key={index} data={data} />
+    ));
+
     return (
-        <>
-            {markerData && (
-                <CircleMarker 
-                    center={[parseFloat(markerData[nb].coord.split(',')[0]), parseFloat(markerData[nb].coord.split(',')[1])]} 
-                    radius={10}
-                    className='reperes'
-                >
-                    <Popup className='popup-src'>
-                        <div>
-                            <h3>{markerData.name}</h3>
-                            <img src={markerData.picture} alt={markerData.name} style={{ maxWidth: '200px' }} />
-                        </div>
-                    </Popup>
-                </CircleMarker>
-            )}
-        </>
-    );
-}
-function addReperes() {
-    const reperes = [];
-    for (let i = 0; i <= 6; i++) {
-        reperes.push(<Test nb={i} key={i} />);
-    }
-    return (
-        reperes
-    );
-    
-}
-function Reperes() {
-    return (
-        <>
-           {addReperes()}
-        </>
+        <>{reperes}</>
     );
 }
 

@@ -2,13 +2,24 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { Marker, Popup } from 'react-leaflet';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
 function Search() {
-  const [searchValue, setSearchValue] = useState('');
+
   const [showSearchMarker, setShowSearchMarker] = useState(false);
   const [markerData, setMarkerData] = useState(null);
   const [data, setData] = useState([]); // State to hold fetched data
   const [error, setError] = useState(null); // State to hold error information
+
   
   const fetchData = async (name) => {
     try {
@@ -25,46 +36,40 @@ function Search() {
   };
       
   const handleOnSearch = (string, results) => {
-    console.log("Search");
-
     console.log(string, results);
     fetchData(string);
   };
 
-  const handleOnHover = (result) => {
-    console.log("hover  ");
-
-    console.log(result);
-  };
-
   const handleOnSelect = (item) => {
-    console.log("select");
-
     console.log(item);
-
     setMarkerData(item);
     setShowSearchMarker(true);
   };
 
-  const handleOnFocus = () => {
-    console.log("Focused");
-  };
-
   const handleOnClear = () => {
-    console.log("Cleared");
     setShowSearchMarker(false);
-
   };
 
   const formatResult = (item) => {
-    console.log(item);
-    return (
-      <div className="result-wrapper">
-        <span className="result-span">{item.dept}</span>
-        <span className="result-span"> {item.name}</span>
-        <span className="result-span"> {item.id}</span>
-      </div>
-    );
+    if (item.hasOwnProperty('name')) {
+      return (
+        <>
+          <span className="result-span"> {item.name ? item.name : item.id}</span>
+        </>
+      );
+    } else if (item.hasOwnProperty('departement')) {
+      return (
+        <>
+          <span className="result-span">{item.id} | {item.departement}</span>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <span className="result-span">{item.id}</span>
+        </>
+      );
+    }
   };
 
   
@@ -74,24 +79,20 @@ function Search() {
         <ReactSearchAutocomplete
           items={data}
           maxResults={10}
+          placeholder='Recherchez un lieu...'
           onSearch={handleOnSearch}
-          onHover={handleOnHover}
           onSelect={handleOnSelect}
-          onFocus={handleOnFocus}
           onClear={handleOnClear}
-          showNoResultsText={'No results found'}
+          showNoResultsText={'Aucun résultat trouvé.'}
           inputDebounce={10} //delay before search
-          fuseOptions={{ keys: ["name", "name2", "dept", "id"]}} 
+          fuseOptions={{ keys: ["departement", "dept", "name", "name2", "id", "address", "usage", "autre"], threshold: 1}} 
           formatResult={formatResult}
-          styling={{ zIndex:  10}}
         />
       </div>
       <div>
         {showSearchMarker && (
-        <Marker position={[parseFloat(markerData.coordonnees.split(',')[0]), parseFloat(markerData.coordonnees.split(',')[1])]}>
-          <Popup>
-            qqq
-          </Popup>
+        <Marker position={markerData.coordonnees ? [parseFloat(markerData.coordonnees.split(',')[0]), parseFloat(markerData.coordonnees.split(',')[1])] : [45.78368335418658, 4.872680033677473]}>
+        
         </Marker>
       )}
       </div>

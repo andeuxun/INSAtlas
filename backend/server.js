@@ -19,7 +19,7 @@ app.get('/hi', (req, res) => {
 });
 
 app.get('/money', (req,res) => {
-  res.send("Money");
+  res.send("qq");
 });
 
 app.get('/findplace', async(req,res) => {
@@ -80,6 +80,47 @@ app.get('/findplace', async(req,res) => {
   }
 })
 
+
+app.get('/findbat', async(req,res) => {
+  try {
+
+    const {name} = req.query;
+
+    const regexPattern = new RegExp(name, 'i');
+
+    const query_batiments = { $or: [
+      { name: regexPattern },
+      { name2: regexPattern },
+      { dept: regexPattern },
+    ] };
+
+    console.log(query_batiments);
+    const data_batiments_raw = await Batiments.find(query_batiments);
+    console.log(data_batiments_raw);
+
+    const dataBatiments = data_batiments_raw.map(doc => ({
+      id: doc.id,
+      name: doc.name,
+      name2: doc.name2,
+      dept: doc.dept,
+      address: doc.address,
+      coordonnees: doc.coordonnees
+    }));
+
+    console.log("Data Batiments: \n", dataBatiments);
+
+    const sentData = dataBatiments
+
+    //console.log(sentData);  
+    res.status(200).json(sentData);
+    //console.log(res);  
+  } catch (error) {
+    console.log("Error");
+    res.status(500).json({message: error.message})
+  }
+})
+
+
 app.get('/getreperes', async(req, res) => {
   try {
     const data_reperes_raw = await Reperes.find({});
@@ -106,7 +147,8 @@ app.post('/addSalle', async (req, res) => {
     batiment: req.body.batiment,
     etage: req.body.etage,
     usage: req.body.usage,
-    departement: req.body.departement
+    departement: req.body.departement,
+    autre: req.body.autre
   });
 
   try {
